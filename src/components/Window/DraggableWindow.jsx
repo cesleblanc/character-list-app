@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CharacterWindow from "../Character/characterWindow";
 
 const DraggableWindow = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -39,6 +40,7 @@ const DraggableWindow = () => {
       onMouseUp={handleMouseUp}
     >
       {/* Your draggable window content goes here */}
+      <CharacterWindow />
     </div>
   );
 };

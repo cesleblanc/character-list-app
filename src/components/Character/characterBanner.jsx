@@ -1,5 +1,6 @@
 import React from "react";
 import characterList from "../../character_list.json";
+import AddCharacterButton from "./AddCharacterButton";
 
 const CharacterBanner = () => {
   const sortedCharacterList = characterList.sort((a, b) =>
@@ -30,15 +31,16 @@ const CharacterBanner = () => {
       >
         List of Characters
       </h1>
-      <ul>
+      <ul style={{ listStyleType: "none", paddingLeft: "0", fontSize: "18px" }}>
         {sortedCharacterList.map((character) => (
-          <li key={character.id}>
+          <li key={character.id} style={{ textAlign: "left" }}>
             <a href={`/${character.name}`} style={{ color: "blue" }}>
               {character.name}
             </a>
           </li>
         ))}
       </ul>
+      <AddCharacterButton />
     </div>
   );
 };
