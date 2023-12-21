@@ -1,11 +1,9 @@
 import React from "react";
-import characterList from "../../character_list.json";
+import data from "../../data";
 import AddCharacterButton from "./AddCharacterButton";
 
 const CharacterBanner = () => {
-  const sortedCharacterList = characterList.sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
+  const sortedCharacterList = data.sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div

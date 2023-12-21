@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import characterList from "../../character_list.json";
+import { saveCharacter } from "../../data";
 
 const CharacterWindow = ({ action, selectedCharacter }) => {
   const [character, setCharacter] = useState(selectedCharacter || {});
+  const [showWindow, setShowWindow] = useState(true);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +31,7 @@ const CharacterWindow = ({ action, selectedCharacter }) => {
   };
 
   const renderCharacterWindow = () => {
-    if (true) {
+    if (showWindow) {
       return (
         <div
           style={{
@@ -73,11 +74,11 @@ const CharacterWindow = ({ action, selectedCharacter }) => {
   };
 
   const handleSave = () => {
-    // Save logic here
+    saveCharacter(character);
   };
 
   const handleExit = () => {
-    // Exit logic here
+    setShowWindow(false);
   };
 
   return <div>{renderCharacterWindow()}</div>;

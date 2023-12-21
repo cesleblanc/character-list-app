@@ -1,47 +1,40 @@
 import React, { useState } from "react";
-import { Resizable, ResizableBox } from "react-resizable";
+import CharacterWindow from "../CharacterBanner/characterWindow";
 
-const CharacterWindow = ({ initialPosition, initialSize, children }) => {
-  const [position, setPosition] = useState(initialPosition);
-  const [size, setSize] = useState(initialSize);
+const DraggableContainer = () => {
+  const [dragging, setDragging] = useState(false);
+  const [components, setComponents] = useState([]);
 
-  const handleDrag = (e, { deltaX, deltaY }) => {
-    setPosition({ x: position.x + deltaX, y: position.y + deltaY });
+  const handleDragStart = (e) => {
+    e.dataTransfer.setData("text/plain", e.target.id);
+    setDragging(true);
   };
 
-  const handleResize = (e, { size }) => {
-    setSize(size);
+  const handleDragEnd = () => {
+    setDragging(false);
+  };
+
+  const handleAddComponent = () => {
+    setComponents([...components, <CharacterWindow />]);
   };
 
   return (
     <div
-      style={{
-        top: position.y,
-        left: position.x,
-        width: size.width,
-        height: size.height,
-        backgroundColor: "lightbrown", // Add light brown background color
-      }}
+      className={`draggable-container ${dragging ? "dragging" : ""}`}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      draggable
+      style={{ backgroundColor: "lightbrown" }} // Add the background color here
     >
-      <Resizable
-        width={size.width}
-        height={size.height}
-        onResize={handleResize}
-        draggableOpts={{ grid: [1, 1] }}
-      >
-        <ResizableBox
-          width={size.width}
-          height={size.height}
-          minConstraints={[100, 100]}
-          maxConstraints={[500, 500]}
-          onResize={handleResize}
-          onDrag={handleDrag}
-        >
-          {children}
-        </ResizableBox>
-      </Resizable>
+      <div>
+        <button onClick={handleAddComponent}>Add Character</button>
+      </div>
+      {/* Render your draggable components here */}
+      {components.map((component, index) => (
+        <div key={index}>{component}</div>
+      ))}
     </div>
   );
 };
 
-export default CharacterWindow;
+export default DraggableContainer;
