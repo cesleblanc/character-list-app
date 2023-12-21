@@ -3,8 +3,6 @@ import characterList from "../../character_list.json";
 
 const CharacterWindow = ({ action, selectedCharacter }) => {
   const [character, setCharacter] = useState(selectedCharacter || {});
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isDragging, setIsDragging] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -12,26 +10,6 @@ const CharacterWindow = ({ action, selectedCharacter }) => {
       ...prevCharacter,
       [name]: value,
     }));
-  };
-
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setPosition({
-      x: e.clientX - e.target.offsetLeft,
-      y: e.clientY - e.target.offsetTop,
-    });
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    setPosition({
-      x: e.clientX - e.target.offsetWidth / 2,
-      y: e.clientY - e.target.offsetHeight / 2,
-    });
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
   };
 
   const renderEditableField = (fieldName, label) => {
@@ -52,25 +30,28 @@ const CharacterWindow = ({ action, selectedCharacter }) => {
   };
 
   const renderCharacterWindow = () => {
-    // if (action === "addCharacter" || action === "editCharacter") {
     if (true) {
       return (
         <div
           style={{
             border: "2px solid black",
             padding: "10px",
-            position: "absolute",
-            top: `${position.y}px`,
-            left: `${position.x}px`,
             width: "400px",
             height: "300px",
             backgroundColor: "white",
             zIndex: 999,
           }}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
         >
+          <div
+            style={{
+              backgroundColor: "lightblue",
+              textAlign: "center",
+              fontWeight: "bold",
+              padding: "10px",
+            }}
+          >
+            Character Profile
+          </div>
           {renderEditableField("name", "Name")}
           {renderEditableField("fightingStyle", "Fighting Style")}
           {renderEditableField("proficiencies", "Proficiencies")}

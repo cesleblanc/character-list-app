@@ -1,15 +1,12 @@
 import logo from "./logo.svg";
 import "./App.css";
-import CharacterBanner from "./components/Character/characterBanner";
-import DraggableWindow from "./components/Window/DraggableWindow";
-import CharacterWindow from "./components/Character/characterWindow";
+import CharacterBanner from "./components/CharacterBanner/characterBanner";
+import CharacterWindow from "./components/CharacterBanner/characterWindow";
+import CharacterListWrapper from "./components/Window/CharacterListWrapper";
 function App() {
   return (
     <div className="App">
-      <CharacterWindow />
-      <CharacterWindow />
-      <CharacterWindow />
-      <CharacterBanner />
+      <CharacterListWrapper />
     </div>
   );
 }
